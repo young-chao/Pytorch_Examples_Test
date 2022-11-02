@@ -1,3 +1,5 @@
+# torchrun --nproc_per_node=2 vit_ddp.py
+
 import os
 import time
 import torch
