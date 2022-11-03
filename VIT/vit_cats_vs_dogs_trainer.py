@@ -18,8 +18,9 @@ from transformers import (
 
 model_args = "google/vit-base-patch16-224-in21k"
 
-dataset = load_dataset("hf-internal-testing/cats_vs_dogs_sample")
-dataset["validation"] = dataset["train"]
+dataset = load_dataset("hf-internal-testing/cats_vs_dogs_sample")["train"]
+dataset = dataset.train_test_split(test_size=0.1)
+dataset["validation"] = dataset["test"]
 
 
 model = AutoModelForImageClassification.from_pretrained("google/vit-base-patch16-224-in21k")
@@ -53,7 +54,7 @@ dataset["train"] = dataset["train"].map(
     lambda examples: {'pixel_values': [_train_transforms(pil_img.convert("RGB")) for pil_img in dataset["train"]["image"]]}, batched=True
 )
 dataset["validation"] = dataset["validation"].map(
-    lambda examples: {'pixel_values': [_val_transforms(pil_img.convert("RGB")) for pil_img in dataset["train"]["image"]]}, batched=True
+    lambda examples: {'pixel_values': [_val_transforms(pil_img.convert("RGB")) for pil_img in dataset["validation"]["image"]]}, batched=True
 )
 
 
