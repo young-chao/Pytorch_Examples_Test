@@ -22,7 +22,7 @@ epochs = 5
 lr = 2e-5
 batch_size = 8
 model_args = "google/vit-base-patch16-224-in21k"
-dataset_args = "fashion_mnist"
+dataset_args = "cifar10"
 
 
 # 数据集加载
@@ -55,7 +55,7 @@ _train_transforms = Compose(
     ]
 )
 train_data = train_data.map(
-    lambda examples: {'pixel_values': [_train_transforms(pil_img.convert("RGB")) for pil_img in train_data["image"]]}, batched=True
+    lambda examples: {'pixel_values': [_train_transforms(pil_img.convert("RGB")) for pil_img in train_data["img"]]}, batched=True
 )
 def collate_fn(examples):
     pixel_values = torch.stack([torch.tensor(example["pixel_values"]) for example in examples])
