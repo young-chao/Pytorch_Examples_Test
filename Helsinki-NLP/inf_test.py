@@ -1,6 +1,7 @@
 # import os
 import time
 import torch
+import numpy as np
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 # print(os.getcwd())
@@ -32,7 +33,9 @@ with torch.no_grad():
         dif_time = 0
         for j in range(10):
             model_inputs[i] = tokenizer(src_lines[i], max_length=30, padding=True, return_tensors="pt").to(device)
-            tem = model.generate(**model_inputs[i])
+            model_inputs[i]["num_return_sequences"] = 1
+            tem = model.generate(**model_inputs[i], max_new_tokens=30)
+            # tem = np.where(tem!=-100, tem, tokenizer.pad_token_id)
             tem_start = time.time()
             generated_tokens = torch.cat( (generated_tokens, tem), dim = 1)
             tem_end =  time.time()
@@ -40,8 +43,8 @@ with torch.no_grad():
         result = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
         end = time.time()
         # print(result[0])
-        ti = str(end - start - dif_time) + "\n"
+        ti = str((end - start - dif_time)*100) + "\n"
         # print(dif_time)
-        print(i, "time:", end-start-dif_time, "s")
+        print(i, "time:", (end-start-dif_time)*100, "ms")
         with open("./results/time.txt","a") as file:
             file.write(ti)
