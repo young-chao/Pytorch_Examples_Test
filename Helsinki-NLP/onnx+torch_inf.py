@@ -23,7 +23,7 @@ def shift_tokens_right(input_ids: np.array, pad_token_id: int, decoder_start_tok
 
 for i in range(100):
     start = time.time()
-    for j in range(1):
+    for j in range(10):
         # onnx模型的输入为numpy.array
         encoder_inputs = tokenizer(src_lines[i], return_tensors="np")
         decoder_inputs = tokenizer(src_lines[i], return_tensors="np")
