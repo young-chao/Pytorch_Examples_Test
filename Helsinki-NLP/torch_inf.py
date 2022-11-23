@@ -24,7 +24,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 model_inputs = ["" for i in range(100)]
 
-print("-------start the training!-------")
+print("-------start the inference!-------")
 with torch.no_grad():
     for i in range(100):
         # i = 9
