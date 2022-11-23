@@ -27,7 +27,6 @@ model_inputs = ["" for i in range(100)]
 print("-------start the inference!-------")
 with torch.no_grad():
     for i in range(100):
-        # i = 9
         start = time.time()
         generated_tokens = torch.Tensor().to(device)
         dif_time = 0
