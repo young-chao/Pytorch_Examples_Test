@@ -1,4 +1,4 @@
-# torch==1.12.0+cu113, transformers==4.24.0, onnxruntime==1.9.0, onnxruntime-tools==1.7.0
+# torch==1.12.0+cu113, transformers==4.24.0, onnxruntime==1.12.0, onnxruntime-tools==1.7.0
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import onnxruntime as ort
 import torch
