@@ -35,10 +35,10 @@ feature_extractor = ViTFeatureExtractor.from_pretrained(model_args, cache_dir = 
 normalize = Normalize(mean=feature_extractor.image_mean, std=feature_extractor.image_std)
 _train_transforms = Compose(
     [
-        RandomResizedCrop(feature_extractor.size),
-        RandomHorizontalFlip(),
+        RandomResizedCrop(feature_extractor.size), #将给定图像随机裁剪为不同的大小和宽高比，然后缩放所裁剪得到的图像为制定的大小
+        RandomHorizontalFlip(), #随机水平翻转给定的PIL.Image,概率为0.5
         ToTensor(),
-        normalize,
+        normalize, #归一化处理
     ]
 )
 train_data = train_data.map(
