@@ -1,4 +1,5 @@
 # torchrun --nproc_per_node=2 vit_cats_vs_dogs_ddp.py
+# transformers==4.24.0
 
 import os
 import time
